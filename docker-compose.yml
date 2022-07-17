@@ -11,7 +11,7 @@ services:
       - ./registry/config.yml:/etc/docker/registry/config.yml:ro
     container_name: registry-srv
   registry-ui:
-    image: joxit/docker-registry-ui:static
+    image: joxit/docker-registry-ui
     restart: always
     ports:
       - 8080:80
