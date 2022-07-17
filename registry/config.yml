@@ -14,6 +14,13 @@ http:
   headers:
     X-Content-Type-Options: [nosniff]
     Access-Control-Allow-Origin: ['http://docker.service:8080']
+    Access-Control-Allow-Credentials: [true]
+    Access-Control-Allow-Headers: ['Authorization', 'Accept']
+    Access-Control-Allow-Methods: ['HEAD', 'GET', 'OPTIONS', 'DELETE']
+#auth:
+#  htpasswd:
+#    realm: basic-realm
+#    path: /etc/docker/registry/htpasswd
 health:
   storagedriver:
     enabled: true
