@@ -5,17 +5,20 @@ services:
     image: registry:latest
     restart: always
     ports:
-      - 5000:5000
+      - 5555:5000
     volumes:
       - ./registry/storage:/var/lib/registry
       - ./registry/config.yml:/etc/docker/registry/config.yml:ro
+      - ./registry/htpasswd:/etc/docker/registry/htpasswd
+      - /etc/letsencrypt/live/{{docker_registry_url}}/fullchain.pem:/etc/letsencrypt/live/{{docker_registry_url}}/fullchain.pem
+      - /etc/letsencrypt/live/{{docker_registry_url}}/privkey.pem:/etc/letsencrypt/live/{{docker_registry_url}}/privkey.pem
     container_name: docker.service
   registry-ui:
     image: joxit/docker-registry-ui
     restart: always
     ports:
-      - 8080:80
+      - 8888:80
     environment:
-      - REGISTRY_URL=http://docker.service:5000
+      - REGISTRY_URL=https://{{docker_registry_url}}:5000
       - DELETE_IMAGES=true
     container_name: registry-ui

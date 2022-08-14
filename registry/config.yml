@@ -10,17 +10,20 @@ storage:
   delete:
     enabled: true
 http:
-  addr: :5000
+  addr: 0.0.0.0:5000
+  host: https://{{docker_registry_url}}:5000
   headers:
     X-Content-Type-Options: [nosniff]
-    Access-Control-Allow-Origin: ['http://docker.service:8080']
+    Access-Control-Allow-Origin: ['https://{{docker_registry_url}}:8080']
     Access-Control-Allow-Credentials: [true]
+    Access-Control-Max-Age: [1728000]
     Access-Control-Allow-Headers: ['Authorization', 'Accept']
     Access-Control-Allow-Methods: ['HEAD', 'GET', 'OPTIONS', 'DELETE']
-#auth:
-#  htpasswd:
-#    realm: basic-realm
-#    path: /etc/docker/registry/htpasswd
+    Access-Control-Expose-Headers: ['Docker-Content-Digest']
+auth:
+  htpasswd:
+    realm: basic-realm
+    path: /etc/docker/registry/htpasswd
 health:
   storagedriver:
     enabled: true
