@@ -9,7 +9,7 @@ services:
     volumes:
       - ./registry/storage:/var/lib/registry
       - ./registry/config.yml:/etc/docker/registry/config.yml:ro
-      - ./registry/htpasswd:/etc/docker/htpasswd
+      - /etc/docker/htpasswd:/etc/docker/htpasswd
       - /etc/letsencrypt/live/{{docker_registry_url}}/fullchain.pem:/etc/letsencrypt/live/{{docker_registry_url}}/fullchain.pem
       - /etc/letsencrypt/live/{{docker_registry_url}}/privkey.pem:/etc/letsencrypt/live/{{docker_registry_url}}/privkey.pem
     container_name: docker.service
